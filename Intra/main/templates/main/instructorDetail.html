@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Detail moniteur
+{% endblock %}
+
+{% block content %}
+{% if profile.role == "['SE']" or profile.role == "AD" %}
+    <h1>Detail du moniteur {{instructor.email}}</h1>
+    <ul>
+        <li>Email : {{instructor.email}}</li>
+    <form action="/instructor/delete/{{instructor.id}}" >
+        <button type="submit" class="btn btn-danger">Suprimer compte</button>
+    </form>
+{% else %}
+    <h3>Vous n'avez pas accés a cette page</h3>
+{% endif %}
+{% endblock %}

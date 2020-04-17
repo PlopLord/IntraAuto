@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Liste des étudiant
+{% endblock %}
+
+{% block content %}
+{% if  profile.role == "['IN']" or profile.role == "['SE']" or profile.role == "AD" %}
+    <h1>Liste des étudiant</h1>
+    <ul>
+    {% for student in students %}
+        <li><a href="/students/detail/{{student.id}}" >{{ student }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <h3>Vous n'avez pas accés a cette page</h3>
+{% endif %}
+{% endblock %}

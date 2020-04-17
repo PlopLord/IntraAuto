@@ -1,0 +1,43 @@
+    
+
+    {% extends 'main/base.html' %}
+
+{% block title %}
+Prendre RDV
+{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% if profile.role == "['IN']" or profile.role == "['SE']" or profile.role == "AD" %}
+<h1>Planning</h1>
+{% for plan in planning %}
+<ul>
+    <li>Eleve : {{plan.student}}</li>
+    <li>Moniteur : {{plan.instructor}}</li>
+    <li>Jour : {{plan.day}}</li>
+    <li> Heure de Début : {{plan.start}}</li>
+    <li> Heure de fin : {{plan.end}}</li>
+    <li> Durée : {{plan.duration}}</li>
+    <li> Lieux : {{plan.place}}</li>
+</ul>
+{% endfor %}
+{% elif profile.role == "['ST']" %}
+<h1>Planning</h1>
+    {% for pla in planning %}
+    
+        {% if profile.email == pla.student %}  
+        <ul>
+            <li>Eleve : {{pla.student}}</li>
+            <li>Moniteur : {{pla.instructor}}</li>
+            <li>Jour : {{pla.day}}</li>
+            <li>Heure de Début : {{pla.start}}</li>
+            <li>Heure de fin : {{pla.end}}</li>
+            <li>Durée : {{pla.duration}}</li>
+            <li>Lieux : {{pla.place}}</li>
+        </ul>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <h3>Vous n'avez pas accés a cette page</h3>
+{% endif %}
+{% endblock %}

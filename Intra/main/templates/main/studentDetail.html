@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Detail eleve
+{% endblock %}
+
+{% block content %}
+{% if profile.role == "['SE']" or profile.role == "['IN']" or profile.role == "AD" or profile.id == student.id %}
+    <h1>Detail de l'eleve {{student.email}}</h1>
+    <ul>
+        <li>Email : {{student.email}}</li>
+    {% for student in student.students.all %}
+        <form action="/students/add_hour/{{student.id}}/" method="POST">
+            {% csrf_token %}
+            <li> Heures restantes : {{student.remaining_hour}}
+                {% if profile.role == "['SE']" or profile.role == "AD" %}
+                 <input type="number" id="hour" name="hour" style="width: 40px;"  required>
+            <button style="width: 80px;" type="submit" class="btn btn-success">Ajouter</button></li>
+            {% endif %}
+        </form>
+        <li> Heures dépensée : {{student.done_hour}} </li>
+    {% endfor %}
+    </ul>
+    {% if profile.role == "['SE']" or profile.role == "AD" %}
+    <form action="/students/delete/{{student.id}}" >
+        <button type="submit" class="btn btn-danger">Suprimer compte</button>
+    </form>
+    {%endif %}
+{% else %}
+    <h3>Vous n'avez pas accés a cette page</h3>
+{% endif %}
+{% endblock %}

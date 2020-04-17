@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Liste des moniteurs
+{% endblock %}
+
+{% block content %}
+{% if profile.role == "['SE']" or profile.role == "AD" %}
+    <h1>Liste des moniteurs</h1>
+    <ul>
+    {% for instructor in instructors %}
+        <li><a href="/instructor/detail/{{instructor.id}}" >{{ instructor }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <h3>Vous n'avez pas accés a cette page</h3>
+{% endif %}
+{% endblock %}

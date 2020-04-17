@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Prendre RDV
+{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% if profile.role == "['IN']" or profile.role == "['SE']" or profile.role == "AD" %}
+    <h1>Prendre RDV</h1>
+    <form method="POST" class="form-group">
+		{% csrf_token %}
+        {{ form|crispy }}
+        <label for="day">Jour de la session</label><br>
+        <input type="date" name="day" required/><br>
+        <label for="start">Début de la session</label><br>
+        <input type="time" name="start" required/><br>
+        <label for="end">Fin de la session</label><br>
+        <input type="time" name="end" required/><br>
+		<button type="submit" class="btn btn-success">Enregistrer</button>
+	</form>
+{% else %}
+    <h3>Vous n'avez pas accés a cette page</h3>
+{% endif %}
+{% endblock %}
